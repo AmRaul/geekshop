@@ -889,17 +889,7 @@ td:first-child {
 	font-weight: 700;
 }
 
-.details-products {
-	padding-left: 98px;
-	padding-right: 98px;
-	margin-top: 98px;
-	height: 651px; 
-}
-.details-slider {
-	width: 570px;
-	float: left;
-	margin-right: 30px;
-}
+
 .slider-product {
 	width: 570px;
 	height: 570px;
