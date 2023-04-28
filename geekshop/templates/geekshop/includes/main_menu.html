@@ -1,7 +1,7 @@
 <a href="{% url 'index' %}" class="logo"></a>
 <ul class="menu">
-    <li><a href="{% url 'index' %}" class="active">домой</a></li>
-    <li><a href="{% url 'products:index' %}">продукты</a></li>
-    <li><a href="{% url 'contacts' %}">контакты</a></li>
+    {% for link in links_main_menu %}
+    <li><a href="{{link.href}}" class="{% if request.resolver_match.route == link.route %} active {% endif %}">{{link.name}}</a></li>
+    {% endfor %}
 </ul>
 <a href="#" class="search"></a>
