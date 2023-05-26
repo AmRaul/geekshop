@@ -1,27 +1,31 @@
 from django.shortcuts import render
 
+from basketapp.models import Basket
 from mainapp.models import Product
 
-links_main_menu = [
-        {'href': '/', 'name': 'домой', 'route': ''},
-        {'href': '/products/', 'name': 'продукты','route': 'products/'},
-        {'href': '/contact/', 'name': 'контакты', 'route': 'contact/'},
-    ]
+
 def index(request):
     title = 'GeekShop'
     products = Product.objects.all()[:4]
+    basket = []
+    if request.user.is_authenticated:
+        basket = Basket.objects.filter(user=request.user)
 
     context = {
         'title': title,
-        'links_main_menu': links_main_menu,
-        'products': products
+        'products': products,
+        'basket': basket,
     }
     return render(request, 'geekshop/index.html', context)
 
+
 def contacts(request):
     title = 'контакты'
+    basket = []
+    if request.user.is_authenticated:
+        basket = Basket.objects.filter(user=request.user)
     context = {
         'title': title,
-        'links_main_menu': links_main_menu,
+        'basket': basket,
     }
-    return render(request, 'geekshop/contact.html', context)
+    return render(request, 'geekshop/contacts.html', context)

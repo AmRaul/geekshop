@@ -1,18 +1,15 @@
 from django.shortcuts import render, get_object_or_404
 
+from basketapp.models import Basket
 from mainapp.models import ProductCategory, Product
 
-
-# Create your views here.
 
 def products(request, pk=None):
     title = 'каталог'
     links_menu = ProductCategory.objects.all()
-    links_main_menu = [
-        {'href': '/', 'name': 'домой', 'route': ''},
-        {'href': '/products/', 'name': 'продукты', 'route': 'products/'},
-        {'href': '/contact/', 'name': 'контакты', 'route': 'contact/'},
-    ]
+    basket = []
+    if request.user.is_authenticated:
+        basket = Basket.objects.filter(user=request.user)
 
     if pk is not None:
         if pk == 0:
@@ -25,18 +22,18 @@ def products(request, pk=None):
         context = {
             'title': title,
             'links_menu': links_menu,
-            'links_main_menu': links_main_menu,
             'products': products,
             'category': category,
+            'basket': basket,
         }
         return render(request, 'mainapp/products.html', context=context)
 
-    same_products = Product.objects.all()
+    same_products = Product.objects.all()[3:5]
 
     context = {
         'title': title,
         'links_menu': links_menu,
-        'links_main_menu': links_main_menu,
         'products': same_products,
+        'basket': basket,
     }
     return render(request, 'mainapp/products.html', context=context)

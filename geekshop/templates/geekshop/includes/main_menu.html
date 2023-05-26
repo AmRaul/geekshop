@@ -1,8 +1,8 @@
 <a href="{% url 'index' %}" class="logo"></a>
 <ul class="menu">
-    {% for link in links_main_menu %}
-    <li><a href="{{link.href}}" class="{% if request.resolver_match.route == link.route %} active {% endif %}">{{link.name}}</a></li>
-    {% endfor %}
+    <li><a href="{% url 'index' %}" class="active">домой</a></li>
+    <li><a href="{% url 'products:index' %}">продукты</a></li>
+    <li><a href="{% url 'contacts' %}">контакты</a></li>
     {% if user.is_authenticated %}
         <li>
             <a href="{% url 'auth:edit' %}">
@@ -16,6 +16,15 @@
         {% else %}
           <a href="{% url 'auth:login' %}">войти</a>
         {% endif %}
+    </li>
+    <li>
+        <a href="{% url 'basket:index' %}" class="basket">
+            <span>
+                {% if basket %} {{ basket|length }} {% endif %}
+            </span>
+        </a>
+
+
     </li>
 </ul>
 <a href="#" class="search"></a>
