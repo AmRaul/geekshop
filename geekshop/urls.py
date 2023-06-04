@@ -20,13 +20,16 @@ from django.contrib import admin
 from django.urls import path, include
 from .views import index, contacts
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
 
     path('', index, name='index'),
-    path('contact/', contacts, name='contacts'),
+    path('contacts/', contacts, name='contacts'),
+
     path('products/', include('mainapp.urls', namespace='products')),
+    path('auth/', include('authapp.urls', namespace='auth')),
+    path('basket/', include('basketapp.urls', namespace='basket')),
+    path('admin_staff/', include('adminapp.urls', namespace='admin_staff')),
 ]
 
 if settings.DEBUG:

@@ -39,7 +39,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'mainapp',
+    'authapp',
+    'basketapp',
+    'adminapp',
 ]
+
+AUTH_USER_MODEL = 'authapp.ShopUser'
+LOGIN_URL = '/auth/login/'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
